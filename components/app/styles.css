@@ -1,0 +1,88 @@
+.app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  color: white;
+  background-color: #E22C41;
+  height: 32px;
+  padding: 10px;
+}
+
+.app-body {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  background-color: #ECF0F5;
+}
+
+.app-body > .side-bar {
+  width: 200px;
+  height: 100%;
+}
+
+.app-body > .content {
+  width: 100%;
+  height: 100%;
+}
+
+.app-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1 1 auto;
+}
+
+i.button {
+  cursor: pointer;
+}
+
+.drawer-header {
+  text-align: center;
+  padding: 13px;
+  color: white;
+  background-color: #E22C41;
+}
+
+.drawer-header-label {
+  font-size: 1.4em;
+}
+
+.drawer-section {
+  color: #647478;
+}
+
+.drawer-list-header {
+  font-size: 1.1em;
+}
+
+.drawer-list {
+  padding-left: 5px;
+  font-size: 1.2em;
+}
+
+.drawer-list li {
+  padding: 2px 5px;
+  list-style-type: none;
+  cursor: pointer;
+}
+
+.drawer-list li a:hover {
+  color: white;
+}
+
+.drawer-list li.active {
+  color: white;
+}
+
+.drawer-list li .list-label {
+  padding-left: 10px;
+  cursor: pointer;
+}

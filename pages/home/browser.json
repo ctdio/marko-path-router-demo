@@ -1,0 +1,7 @@
+{
+    "dependencies" : [
+        "font-awesome/css/font-awesome.css",
+        "./styles.css",
+        "require-run: ./main.js"
+    ]
+}
