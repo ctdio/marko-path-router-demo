@@ -1,6 +1,5 @@
 div
-  p
-    -- this is the Charts component
+  p -- Click one of the below buttons
   button onClick('handleBeerClick')
     --  Move to /beer
   button onClick('handleNestedChartClick')
@@ -9,6 +8,9 @@ div
     --  Move to /charts/nested-chart/deep-nested-chart
   p
     -- nested routes will show up below
-  if(input.renderBody)
-    include(input.renderBody)
+  div.chart-container
+    canvas key='pieChartEl' width='200' height='200'
+  div.chart-body
+    if(input.renderBody)
+      include(input.renderBody)
 

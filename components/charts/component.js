@@ -1,8 +1,42 @@
+const Chart = require('chart.js')
 const { history } = require('marko-component-router')
 
 module.exports = {
   onMount: function () {
-    console.log('charts was mounted again')
+    let pieChartEl = this.getEl('pieChartEl').getContext('2d')
+    console.log(pieChartEl)
+    const pie = new Chart(pieChartEl, {
+      type: "pie",
+      data: {
+        labels: [
+          'Red',
+          'Blue',
+          'Yellow'
+        ],
+        datasets: [
+          {
+            data: [3000, 50, 100],
+            backgroundColor: [
+              "#FF6384",
+              "#36A2EB",
+              "#FFCE56"
+            ],
+            hoverBackgroundColor: [
+              "#FF6384",
+              "#36A2EB",
+              "#FFCE56"
+            ]
+          }
+        ]
+      },
+      options: {
+        animation:{
+          animateScale: true
+        }
+      }
+    })
+    console.log(pie)
+    pie.render()
   },
 
   handleBeerClick: function () {

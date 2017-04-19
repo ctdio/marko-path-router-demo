@@ -7,13 +7,11 @@ module.exports = {
     self.state.currentRoute = router.currentRoute
 
     router.on('update', () => {
-      console.log('updated')
       self.state.currentRoute = router.currentRoute
     })
   },
 
   onInput: function (input) {
-    console.log(input)
     this.state = {
       currentRoute: input.currentRoute || '',
       showSidebar: true,
@@ -28,7 +26,6 @@ module.exports = {
 
   getCurrentRoute: function () {
     let router = this.getComponent('router')
-    console.log(router && router.currentRoute)
     return router ? router.currentRoute : ''
   },
 
