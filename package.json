@@ -16,14 +16,16 @@
   "license": "MIT",
   "dependencies": {
     "browser-refresh": "^1.7.1",
-    "chart.js": "^2.5.0",
+    "chartist": "^0.11.0",
     "compression": "^1.6.2",
     "express": "^4.15.2",
     "font-awesome": "^4.7.0",
     "lasso": "^2.11.8",
     "lasso-marko": "^2.3.0",
+    "marked": "^0.3.6",
     "marko": "^4.2.8",
     "marko-component-router": "^0.0.1",
+    "masonry-layout": "^4.1.1",
     "serve-static": "^1.12.1"
   }
 }

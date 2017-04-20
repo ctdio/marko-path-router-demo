@@ -1,0 +1,13 @@
+div [
+  class={
+    'card-container': true,
+    'card-slide-in': state.animate
+  }
+]
+  div.card-content
+    div.card-content-header
+      i class='card-icon fa fa-${input.icon}'
+      label -- ${input.title}
+    div.card-content-body
+      if(input.renderBody)
+        include(input.renderBody)

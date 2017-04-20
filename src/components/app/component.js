@@ -1,5 +1,3 @@
-require('./styles.css')
-
 module.exports = {
   onMount: function () {
     const self = this

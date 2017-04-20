@@ -31,7 +31,7 @@ app.use(compression())
 
 app.use('/static', serveStatic(STATIC_DIR))
 
-app.get('/**', require('pages/home'))
+app.get('/**', require('src/pages/home'))
 
 app.listen(port, function () {
   if (process.send) {

@@ -1,0 +1,9 @@
+.charts-showcase {
+  display: flex;
+  flex: 1 1 0;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  width: 100%;
+  height: 100%;
+}

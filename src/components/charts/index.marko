@@ -1,0 +1,10 @@
+div
+  card icon="question" title="Nested Components"
+    div.charts-explanation
+
+  div.charts-showcase no-update
+    line-chart-card chartId='line1'
+    bar-chart-card chartId='bar1'
+
+  if(input.renderBody)
+    include(input.renderBody)

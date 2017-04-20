@@ -22,7 +22,7 @@ function render(input, out) {
       filename: __filename
     }, out);
 
-  out.w("<html><head><title>Marko Router Demo</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
+  out.w("<html><head><title>Marko Router Demo</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><link href=\"https://fonts.googleapis.com/css?family=Lato\" rel=\"stylesheet\">");
 
   lasso_head_tag({}, out);
 
