@@ -4,44 +4,46 @@
 var marko_template = module.exports = require("marko/html").t(__filename),
     marko_components = require("marko/components"),
     marko_registerComponent = marko_components.rc,
-    marko_componentType = marko_registerComponent("/marko-router-demo$1.0.0/src/components/home/index.marko", function() {
+    marko_componentType = marko_registerComponent("/marko-router-demo$1.0.0/src/components/bar-chart-card/index.marko", function() {
       return module.exports;
     }),
     marko_component = require("./component"),
+    marko_renderComponent = require("marko/components/taglib/helpers/renderComponent"),
+    marko_helpers = require("marko/runtime/html/helpers"),
+    marko_attr = marko_helpers.a,
     marko_loadTemplate = require("marko/runtime/helper-loadTemplate"),
     card_template = marko_loadTemplate(require.resolve("../card")),
-    marko_helpers = require("marko/runtime/html/helpers"),
     marko_loadTag = marko_helpers.t,
-    card_tag = marko_loadTag(card_template),
-    marko_attr = marko_helpers.a;
+    card_tag = marko_loadTag(card_template);
 
 function render(input, out, __component, component, state) {
   var data = input;
 
-  out.w("<div class=\"home\"" +
-    marko_attr("id", __component.id) +
-    ">");
-
-  card_tag({
-      icon: "smile-o",
-      title: "Marko component/path router",
+  marko_renderComponent(card_tag, {
+      icon: "bar-chart",
+      title: "Bar Chart",
       renderBody: function renderBody(out) {
-        out.w("<div class=\"welcome\"><p>Welcome! This is an example of routing for marko.</p></div>");
+        out.w("<div" +
+          marko_attr("id", __component.elId(input.chartId)) +
+          "></div>");
       }
-    }, out);
-
-  out.w("</div>");
+    }, out, [
+    __component,
+    "_r0"
+  ]);
 }
 
 marko_template._ = marko_components.r(render, {
-    type: marko_componentType
+    type: marko_componentType,
+    roots: [
+      "_r0"
+    ]
   }, marko_component);
 
 marko_template.Component = marko_components.c(marko_component, marko_template._);
 
 marko_template.meta = {
     deps: [
-      "./style.css",
       {
           type: "require",
           path: "./"

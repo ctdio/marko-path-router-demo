@@ -4,13 +4,21 @@
 var marko_template = module.exports = require("marko/html").t(__filename),
     marko_components = require("marko/components"),
     marko_registerComponent = marko_components.rc,
-    marko_componentType = marko_registerComponent("/marko-router-demo$1.0.0/components/charts/index.marko", function() {
+    marko_componentType = marko_registerComponent("/marko-router-demo$1.0.0/src/components/charts/index.marko", function() {
       return module.exports;
     }),
     marko_component = require("./component"),
+    marko_loadTemplate = require("marko/runtime/helper-loadTemplate"),
+    card_template = marko_loadTemplate(require.resolve("../card")),
     marko_helpers = require("marko/runtime/html/helpers"),
-    marko_attr = marko_helpers.a,
     marko_loadTag = marko_helpers.t,
+    card_tag = marko_loadTag(card_template),
+    line_chart_card_template = marko_loadTemplate(require.resolve("../line-chart-card")),
+    line_chart_card_tag = marko_loadTag(line_chart_card_template),
+    bar_chart_card_template = marko_loadTemplate(require.resolve("../bar-chart-card")),
+    bar_chart_card_tag = marko_loadTag(bar_chart_card_template),
+    marko_attr = marko_helpers.a,
+    w_preserve_tag = marko_loadTag(require("marko/components/taglib/preserve-tag")),
     include_tag = marko_loadTag(require("marko/taglibs/core/include-tag"));
 
 function render(input, out, __component, component, state) {
@@ -18,19 +26,36 @@ function render(input, out, __component, component, state) {
 
   out.w("<div" +
     marko_attr("id", __component.id) +
-    "><p>this is the Charts component</p><button" +
-    marko_attr("data-marko", {
-      onclick: __component.d("handleBeerClick")
-    }, false) +
-    "> Move to /beer</button><button" +
-    marko_attr("data-marko", {
-      onclick: __component.d("handleNestedChartClick")
-    }, false) +
-    "> Move to /charts/nested-chart</button><button" +
-    marko_attr("data-marko", {
-      onclick: __component.d("handleDeepNestedChartClick")
-    }, false) +
-    "> Move to /charts/nested-chart/deep-nested-chart</button><p>nested routes will show up below</p>");
+    ">");
+
+  card_tag({
+      icon: "question",
+      title: "Nested Components",
+      renderBody: function renderBody(out) {
+        out.w("<div class=\"charts-explanation\"></div>");
+      }
+    }, out);
+
+  var __componentId1 = __component.elId("0[]");
+
+  w_preserve_tag({
+      id: __componentId1,
+      renderBody: function renderBody(out) {
+        out.w("<div class=\"charts-showcase\"" +
+          marko_attr("id", __componentId1) +
+          ">");
+
+        line_chart_card_tag({
+            chartId: "line1"
+          }, out);
+
+        bar_chart_card_tag({
+            chartId: "bar1"
+          }, out);
+
+        out.w("</div>");
+      }
+    }, out);
 
   if (input.renderBody) {
     include_tag({
@@ -49,12 +74,17 @@ marko_template.Component = marko_components.c(marko_component, marko_template._)
 
 marko_template.meta = {
     deps: [
+      "./style.css",
       {
           type: "require",
           path: "./"
         }
     ],
     tags: [
+      "../card",
+      "../line-chart-card",
+      "../bar-chart-card",
+      "marko/components/taglib/preserve-tag",
       "marko/taglibs/core/include-tag"
     ]
   };

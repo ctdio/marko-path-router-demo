@@ -7,6 +7,9 @@ var marko_template = module.exports = require("marko/html").t(__filename),
     marko_loadTag = marko_helpers.t,
     lasso_page_tag = marko_loadTag(require("lasso/taglib/config-tag")),
     lasso_head_tag = marko_loadTag(require("lasso/taglib/head-tag")),
+    marko_loadTemplate = require("marko/runtime/helper-loadTemplate"),
+    app_template = marko_loadTemplate(require.resolve("../../components/app")),
+    app_tag = marko_loadTag(app_template),
     lasso_body_tag = marko_loadTag(require("lasso/taglib/body-tag")),
     init_components_tag = marko_loadTag(require("marko/components/taglib/init-components-tag")),
     await_reorderer_tag = marko_loadTag(require("marko/taglibs/async/await-reorderer-tag"));
@@ -28,6 +31,10 @@ function render(input, out) {
 
   out.w("</head><body><div id=\"application\"></div>");
 
+  app_tag({
+      initialRoute: input.initialRoute
+    }, out);
+
   lasso_body_tag({}, out);
 
   init_components_tag({}, out);
@@ -45,6 +52,7 @@ marko_template.meta = {
     tags: [
       "lasso/taglib/config-tag",
       "lasso/taglib/head-tag",
+      "../../components/app",
       "lasso/taglib/body-tag",
       "marko/components/taglib/init-components-tag",
       "marko/taglibs/async/await-reorderer-tag"

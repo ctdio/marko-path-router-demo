@@ -4,37 +4,24 @@
 var marko_template = module.exports = require("marko/html").t(__filename),
     marko_components = require("marko/components"),
     marko_registerComponent = marko_components.rc,
-    marko_componentType = marko_registerComponent("/marko-router-demo$1.0.0/components/app/index.marko", function() {
+    marko_componentType = marko_registerComponent("/marko-router-demo$1.0.0/src/components/app/index.marko", function() {
       return module.exports;
     }),
     marko_component = require("./component"),
     marko_renderComponent = require("marko/components/taglib/helpers/renderComponent"),
     marko_loadTemplate = require("marko/runtime/helper-loadTemplate"),
-    router_link_template = marko_loadTemplate(require.resolve("marko-component-router/src/components/router-link/index.marko")),
+    sidebar_link_template = marko_loadTemplate(require.resolve("../sidebar-link")),
     marko_helpers = require("marko/runtime/html/helpers"),
     marko_loadTag = marko_helpers.t,
-    router_link_tag = marko_loadTag(router_link_template),
-    marko_classAttr = marko_helpers.ca,
-    marko_attr = marko_helpers.a,
+    sidebar_link_tag = marko_loadTag(sidebar_link_template),
     sidebar_template = marko_loadTemplate(require.resolve("../sidebar/index.marko")),
     sidebar_tag = marko_loadTag(sidebar_template),
-    route_template = marko_loadTemplate(require.resolve("marko-component-router/src/components/route/index.marko")),
-    route_tag = marko_loadTag(route_template),
+    marko_attr = marko_helpers.a,
     router_template = marko_loadTemplate(require.resolve("marko-component-router/src/components/router/index.marko")),
     router_tag = marko_loadTag(router_template);
 
 function render(input, out, __component, component, state) {
   var data = input;
-
-  var homeComponent = require('../home')
-
-  var beerComponent = require('../beer')
-
-  var chartsComponent = require('../charts')
-
-  var nestedChartComponent = require('../nested-chart')
-
-  var deepNestedChartComponent = require('../deep-nested-chart')
 
   out.w("<div class=\"app\"" +
     marko_attr("id", __component.id) +
@@ -50,58 +37,41 @@ function render(input, out, __component, component, state) {
         },
       body: {
           renderBody: function renderBody(out) {
-            out.w("<div class=\"drawer-section\"><ul class=\"drawer-list\"><li data-key=\"home\"" +
-              marko_classAttr({
-                "active": state.activeItem === "home"
-              }) +
-              marko_attr("data-marko", {
-                onclick: __component.d("handleItemClick")
-              }, false) +
-              ">");
+            out.w("<div class=\"drawer-section\"><ul class=\"drawer-list\">");
 
-            router_link_tag({
+            sidebar_link_tag({
+                icon: "home",
                 path: "/",
-                renderBody: function renderBody(out) {
-                  out.w("<i class=\"fa fa-home\"></i><label class=\"list-label\">Home</label>");
-                }
+                title: "home",
+                active: state.currentRoute === "/"
               }, out);
 
-            out.w("</li><li data-key=\"charts\"" +
-              marko_classAttr({
-                "active": state.activeItem === "charts"
-              }) +
-              marko_attr("data-marko", {
-                onclick: __component.d("handleItemClick")
-              }, false) +
-              ">");
-
-            router_link_tag({
+            sidebar_link_tag({
+                icon: "pie-chart",
                 path: "/charts",
-                renderBody: function renderBody(out) {
-                  out.w("<i class=\"fa fa-pie-chart\"></i><label class=\"list-label\">Charts</label>");
-                }
+                title: "charts",
+                active: component.routeMatches("/charts")
               }, out);
 
-            out.w("</li><li data-key=\"beer\"" +
-              marko_classAttr({
-                "active": state.activeItem === "beer"
-              }) +
-              marko_attr("data-marko", {
-                onclick: __component.d("handleItemClick")
-              }, false) +
-              ">");
+            if (component.routeMatches("/charts")) {
+              sidebar_link_tag({
+                  icon: "pie-chart",
+                  path: "/charts/nested-chart",
+                  title: "Nested Chart",
+                  active: component.routeMatches("/charts/nested-chart")
+                }, out);
+            }
 
-            router_link_tag({
+            sidebar_link_tag({
+                icon: "beer",
                 path: "/beer",
-                renderBody: function renderBody(out) {
-                  out.w("<i class=\"fa fa-beer\"></i><label class=\"list-label\">Beer</label>");
-                }
+                title: "beer",
+                active: component.routeMatches("/beer")
               }, out);
 
-            out.w("</li></ul></div>");
+            out.w("</ul></div>");
           }
-        },
-      footer: {}
+        }
     }, out, [
     __component,
     "sidebar"
@@ -113,44 +83,13 @@ function render(input, out, __component, component, state) {
     }, false) +
     "></i></div><div class=\"app-content\">");
 
-  if (state.ready) {
-    router_tag({
-        initialRoute: "/",
-        renderBody: function renderBody(out) {
-          route_tag({
-              path: "/",
-              component: homeComponent
-            }, out);
-
-          route_tag({
-              path: "/charts",
-              component: chartsComponent,
-              renderBody: function renderBody(out) {
-                route_tag({
-                    path: "/nested-chart",
-                    component: nestedChartComponent,
-                    renderBody: function renderBody(out) {
-                      route_tag({
-                          path: "/deep-nested-chart",
-                          component: deepNestedChartComponent
-                        }, out);
-                    }
-                  }, out);
-              }
-            }, out);
-
-          route_tag({
-              path: "/deep-nested-chart",
-              component: deepNestedChartComponent
-            }, out);
-
-          route_tag({
-              path: "/beer",
-              component: beerComponent
-            }, out);
-        }
-      }, out);
-  }
+  marko_renderComponent(router_tag, {
+      initialRoute: "/charts",
+      routeProvider: component.provider
+    }, out, [
+    __component,
+    "router"
+  ]);
 
   out.w("</div></div></div></div>");
 }
@@ -163,15 +102,15 @@ marko_template.Component = marko_components.c(marko_component, marko_template._)
 
 marko_template.meta = {
     deps: [
+      "./style.css",
       {
           type: "require",
           path: "./"
         }
     ],
     tags: [
-      "marko-component-router/src/components/router-link/index.marko",
+      "../sidebar-link",
       "../sidebar/index.marko",
-      "marko-component-router/src/components/route/index.marko",
       "marko-component-router/src/components/router/index.marko"
     ]
   };

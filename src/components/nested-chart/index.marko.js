@@ -4,7 +4,7 @@
 var marko_template = module.exports = require("marko/html").t(__filename),
     marko_components = require("marko/components"),
     marko_registerComponent = marko_components.rc,
-    marko_componentType = marko_registerComponent("/marko-router-demo$1.0.0/components/nested-chart/index.marko", function() {
+    marko_componentType = marko_registerComponent("/marko-router-demo$1.0.0/src/components/nested-chart/index.marko", function() {
       return module.exports;
     }),
     marko_component = require("./component"),
