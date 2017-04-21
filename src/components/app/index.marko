@@ -1,9 +1,3 @@
-$ var homeComponent = require('../home')
-$ var beerComponent = require('../beer')
-$ var chartsComponent = require('../charts')
-$ var nestedChartComponent = require('../nested-chart')
-$ var deepNestedChartComponent = require('../deep-nested-chart')
-
 $ var currentRoute = component.getCurrentRoute()
 
 div.app
@@ -50,10 +44,4 @@ div.app
       div.app-header
         i class='button fa fa-2x fa-bars' onClick('toggleSidebar')
       div.app-content no-update
-        router initialRoute='/' key='router'
-          route path='/' component=homeComponent
-          route path='/charts' component=chartsComponent
-            route path='/nested-chart' component=nestedChartComponent
-              route path='/deep-nested-chart' component=deepNestedChartComponent
-          route path='/deep-nested-chart' component=deepNestedChartComponent
-          route path='/beer' component=beerComponent
+        router initialRoute='/' routes=component.routes key='router'
