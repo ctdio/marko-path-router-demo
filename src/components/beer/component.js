@@ -1,4 +1,4 @@
-const { history } = require('marko-component-router')
+const { history } = require('marko-path-router')
 
 module.exports = {
   handleClick: function () {
