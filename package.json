@@ -24,7 +24,7 @@
     "lasso-marko": "^2.3.0",
     "marked": "^0.3.6",
     "marko": "^4.2.8",
-    "marko-component-router": "^0.0.1",
+    "marko-path-router": "^0.0.1",
     "masonry-layout": "^4.1.1",
     "serve-static": "^1.12.1"
   }
