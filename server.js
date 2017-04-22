@@ -5,13 +5,13 @@ require('lasso/node-require-no-op').enable('.less', '.css')
 require('marko/browser-refresh').enable()
 require('lasso/browser-refresh').enable('*.marko *.css *.less')
 
-var express = require('express')
-var compression = require('compression')
-var serveStatic = require('serve-static')
+const express = require('express')
+const compression = require('compression')
+const serveStatic = require('serve-static')
 
-var isProduction = process.env.node_env === 'production'
+const isProduction = process.env.node_env === 'production'
 
-var STATIC_DIR = `${__dirname}/static`
+const STATIC_DIR = `${__dirname}/static`
 
 require('lasso').configure({
   plugins: [
@@ -23,7 +23,7 @@ require('lasso').configure({
   fingerprintsEnabled: isProduction // Only add fingerprints to URLs in production
 })
 
-var app = express()
+const app = express()
 
 var port = process.env.PORT || 8080
 
@@ -34,6 +34,7 @@ app.use('/static', serveStatic(STATIC_DIR))
 app.get('/**', require('src/pages/home'))
 
 app.listen(port, function () {
+  console.log(`Go to http://localhost:${port} to view the demo...`)
   if (process.send) {
     process.send('online')
   }
