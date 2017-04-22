@@ -3,6 +3,7 @@ const beerComponent = require('../beer')
 const chartsComponent = require('../charts')
 const nestedChartComponent = require('../nested-chart')
 const deepNestedChartComponent = require('../deep-nested-chart')
+const notFoundComponent  = require('../not-found')
 const { Router } = require('marko-path-router')
 
 module.exports = {
@@ -25,7 +26,8 @@ module.exports = {
             ]
           }
         ]
-      }
+      },
+      { path: '/**', component: notFoundComponent }
     ]
 
     const render = Router.renderSync({
@@ -41,6 +43,7 @@ module.exports = {
 
     router.on('update', () => {
       self.state.currentRoute = router.currentRoute
+      console.log('updated')
     })
   },
 
