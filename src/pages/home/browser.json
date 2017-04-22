@@ -3,7 +3,6 @@
         "font-awesome/css/font-awesome.css",
         "./styles.css",
         "chartist/dist/chartist.css",
-        "chartist/dist/chartist.js",
-        "require-run: ./main.js"
+        "chartist/dist/chartist.js"
     ]
 }

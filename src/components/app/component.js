@@ -3,10 +3,13 @@ const beerComponent = require('../beer')
 const chartsComponent = require('../charts')
 const nestedChartComponent = require('../nested-chart')
 const deepNestedChartComponent = require('../deep-nested-chart')
+const { Router } = require('marko-path-router')
 
 module.exports = {
-  onCreate: function () {
-    this.routes = [
+  onMount: function () {
+    const self = this
+
+    const routes = [
       { path: '/', component: homeComponent },
       { path: '/beer', component: beerComponent },
       { path: '/deep-nested-chart', component: deepNestedChartComponent },
@@ -24,11 +27,16 @@ module.exports = {
         ]
       }
     ]
-  },
 
-  onMount: function () {
-    const self = this
-    const router = self.getComponent('router')
+    const render = Router.renderSync({
+      routes: routes,
+      initialRoute: self.input.path
+    })
+
+    const router = this.router = render
+      .appendTo(this.getEl('router-container'))
+      .getComponent()
+
     self.state.currentRoute = router.currentRoute
 
     router.on('update', () => {
@@ -50,8 +58,8 @@ module.exports = {
   },
 
   getCurrentRoute: function () {
-    let router = this.getComponent('router')
-    return router ? router.currentRoute : ''
+    const router = this.router
+    return router && router.currentRoute || ''
   },
 
   handleItemClick: function (event, el) {
