@@ -7,8 +7,15 @@ const notFoundComponent  = require('../not-found')
 const { Router } = require('marko-path-router')
 
 module.exports = {
+  onCreate: function () {
+    this.state = {
+      currentRoute: window.location.pathname
+    }
+  },
+
   onMount: function () {
     const self = this
+    const state = self.state
 
     const routes = [
       { path: '/', component: homeComponent },
@@ -32,27 +39,24 @@ module.exports = {
 
     const render = Router.renderSync({
       routes: routes,
-      initialRoute: self.input.path
+      initialRoute: state.currentRoute
     })
 
     const router = this.router = render
       .appendTo(this.getEl('router-container'))
       .getComponent()
 
-    self.state.currentRoute = router.currentRoute
+    state.currentRoute = router.currentRoute
 
     router.on('update', () => {
-      self.state.currentRoute = router.currentRoute
-      console.log('updated')
+      state.currentRoute = router.currentRoute
     })
   },
 
   onInput: function (input) {
-    this.state = {
-      currentRoute: input.currentRoute || '',
-      showSidebar: true,
-      activeItem: input.activeItem
-    }
+    let state = this.state
+    state.currentRoute = input.currentRoute || state.currentRoute
+    state.activeItem = input.activeItem || state.activeItem
   },
 
   toggleSidebar: function () {

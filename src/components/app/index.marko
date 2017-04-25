@@ -4,7 +4,6 @@ div.app
   div.app-body
     sidebar [
         key='sidebar'
-        reveal=true
         color='#222D32'
     ]
       sidebar:header
@@ -26,20 +25,12 @@ div.app
               title='charts'
               active=currentRoute.startsWith('/charts')
             ]
-            if(component.getCurrentRoute().startsWith('/charts'))
-              sidebar-link [
-                icon='pie-chart'
-                path='/charts/nested-chart'
-                title='Nested Chart'
-                active=currentRoute.startsWith('/charts/nested-chart')
-              ]
             sidebar-link [
               icon='beer'
               path='/beer'
               title='beer'
               active=currentRoute.startsWith('/beer')
             ]
-      sidebar:footer
     div.app-container
       div.app-header
         i class='button fa fa-2x fa-bars' onClick('toggleSidebar')
