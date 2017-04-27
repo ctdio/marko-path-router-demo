@@ -64,11 +64,6 @@ module.exports = {
     sidebar.toggle();
   },
 
-  getCurrentRoute: function () {
-    const router = this.router
-    return router && router.currentRoute || ''
-  },
-
   handleItemClick: function (event, el) {
     this.state.activeItem = el.getAttribute('data-key')
     this.update()

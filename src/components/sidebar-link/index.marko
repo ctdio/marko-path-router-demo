@@ -2,6 +2,11 @@ li.sidebar-link [
   class={'active': input.active}
 ]
   router-link path=input.path
-    i class='fa fa-${input.icon}'
-    label.list-label
-      -- ${input.title}
+    div.sidebar-link-content
+      div.sidebar-flex-container
+        i class='fa fa-${input.icon} fa-fw'
+      div.sidebar-flex-container
+        label.list-label
+          -- ${input.title}
+      div.sidebar-flex-container
+        i class='fa fa-chevron-right sidebar-arrow'

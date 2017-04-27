@@ -1,4 +1,36 @@
+.sidebar-link.active {
+  background-color: #304451;
+}
+
 .sidebar-link a {
   color: inherit;
   text-decoration: none;
+}
+
+.sidebar-link-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar-flex-container {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-flex-container:first-child {
+  padding-left: 15px;
+}
+
+.sidebar-flex-container:last-child {
+  margin-left: auto;
+  padding-right: 15px;
+}
+
+.sidebar-arrow {
+  font-size: 0.7em;
+}
+
+
+.pointer {
+  font-size: 0.8em;
 }

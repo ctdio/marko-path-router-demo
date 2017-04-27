@@ -1,17 +1,18 @@
-$ var currentRoute = component.getCurrentRoute()
+$ var currentRoute = state.currentRoute
 
 div.app
   div.app-body
     sidebar [
         key='sidebar'
-        color='#222D32'
+        color='#253642'
     ]
       sidebar:header
         div.drawer-header
             label.drawer-header-label
-              -- Routing for Marko
+              -- Marko Path Router
       sidebar:body
         div.drawer-section
+          label.drawer-list-header -- Navigation
           ul.drawer-list
             sidebar-link [
               icon='home'
