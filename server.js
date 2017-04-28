@@ -1,17 +1,20 @@
-require('app-module-path').addPath(__dirname)
+require('require-self-ref');
 require('marko/node-require').install()
 require('lasso/node-require-no-op').enable('.less', '.css')
 
 require('marko/browser-refresh').enable()
 require('lasso/browser-refresh').enable('*.marko *.css *.less')
 
-const express = require('express')
-const compression = require('compression')
-const serveStatic = require('serve-static')
+const Koa = require('koa')
 
 const isProduction = process.env.node_env === 'production'
 
 const STATIC_DIR = `${__dirname}/static`
+const compress = require('koa-compress')
+const serve = require('koa-static')
+const mount = require('koa-mount')
+
+const template = require('~/src/pages/home');
 
 require('lasso').configure({
   plugins: [
@@ -23,15 +26,18 @@ require('lasso').configure({
   fingerprintsEnabled: isProduction // Only add fingerprints to URLs in production
 })
 
-const app = express()
+const app = new Koa()
 
 var port = process.env.PORT || 8080
 
-app.use(compression())
+app.use(compress())
 
-app.use('/static', serveStatic(STATIC_DIR))
+app.use(mount('/static', serve(STATIC_DIR)))
 
-app.get('/**', require('src/pages/home'))
+app.use(async (ctx) => {
+  ctx.set('Content-Type', 'text/html; charset=utf-8')
+  ctx.body = template.stream({})
+})
 
 app.listen(port, function () {
   console.log(`Go to http://localhost:${port} to view the demo...`)

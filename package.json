@@ -15,16 +15,20 @@
   "author": "Charlie Duong",
   "license": "MIT",
   "dependencies": {
-    "app-module-path": "^2.2.0",
     "browser-refresh": "^1.7.1",
     "chartist": "^0.11.0",
     "compression": "^1.6.2",
     "express": "^4.15.2",
     "font-awesome": "^4.7.0",
+    "koa": "^2.2.0",
+    "koa-compress": "^2.0.0",
+    "koa-mount": "^3.0.0",
+    "koa-static": "^3.0.0",
     "lasso": "^2.11.8",
     "lasso-marko": "^2.3.0",
     "marko": "^4.2.8",
     "marko-path-router": "^0.1.0",
+    "require-self-ref": "^2.0.1",
     "serve-static": "^1.12.1"
   }
 }
