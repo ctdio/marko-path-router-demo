@@ -1,0 +1,22 @@
+.users {
+  display: flex;
+  flex-direction: row;
+}
+
+.users-list-header {
+  margin-bottom: 5px;
+}
+
+.users-list-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 30px 0px 30px;
+}
+
+.users-list {
+  list-style-type: none;
+}
+
+.user-container {
+  flex: 1 1 0;
+}

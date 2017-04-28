@@ -1,0 +1,13 @@
+$ const { users } = state
+
+div.users
+  div.users-list-container
+    h3.users-list-header -- Users
+    ul.users-list
+      for(let i = 0; i < users.length; i++)
+        li
+          router-link path='/users/${i + 1}'
+            -- ${users[i].name}
+  div.user-container
+    if(input.renderBody)
+      include(input.renderBody)

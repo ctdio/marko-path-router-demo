@@ -3,6 +3,8 @@ const beerComponent = require('../beer')
 const chartsComponent = require('../charts')
 const nestedChartComponent = require('../nested-chart')
 const deepNestedChartComponent = require('../deep-nested-chart')
+const usersComponent = require('../users')
+const userDetailsComponent = require('../user-details')
 const notFoundComponent  = require('../not-found')
 const { Router } = require('marko-path-router')
 
@@ -31,6 +33,16 @@ module.exports = {
             nestedRoutes: [
               { path: '/deep-nested-chart', component: deepNestedChartComponent }
             ]
+          }
+        ]
+      },
+      {
+        path: '/users',
+        component: usersComponent,
+        nestedRoutes: [
+          {
+            path: '/:userId',
+            component: userDetailsComponent
           }
         ]
       },
