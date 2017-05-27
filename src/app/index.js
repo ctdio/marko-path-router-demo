@@ -37,6 +37,10 @@ class App {
   getUsers () {
     return this.users
   }
+  
+  getUser (id) {
+    return this.users[id]
+  }
 }
 
 module.exports = new App()
