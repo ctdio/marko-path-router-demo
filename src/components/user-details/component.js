@@ -1,4 +1,4 @@
-const app = require('~/src/app')
+const app = require('../../app')
 
 module.exports = {
   onCreate: function (input) {
