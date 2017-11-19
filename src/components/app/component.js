@@ -10,15 +10,15 @@ const { Router } = require('marko-path-router')
 
 module.exports = {
   onCreate: function () {
-    this.state = {
-      currentRoute: window.location.pathname
-    }
+    const hash = window.location.hash
+    const currentRoute = hash.substring(1, hash.length) || '/'
+
+    this.state = { currentRoute }
   },
 
   onMount: function () {
     const self = this
     const state = self.state
-
     const routes = [
       { path: '/', component: homeComponent },
       { path: '/beer', component: beerComponent },
@@ -50,6 +50,7 @@ module.exports = {
     ]
 
     const render = Router.renderSync({
+      mode: 'hash',
       routes: routes,
       initialRoute: state.currentRoute
     })

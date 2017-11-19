@@ -13,7 +13,9 @@ const STATIC_DIR = `${__dirname}/static`
 const compress = require('koa-compress')
 const serve = require('koa-static')
 const mount = require('koa-mount')
+const Router = require('koa-path-router')
 
+const router = new Router()
 const template = require('~/src/pages/home');
 
 require('lasso').configure({
@@ -34,10 +36,12 @@ app.use(compress())
 
 app.use(mount('/static', serve(STATIC_DIR)))
 
-app.use(async (ctx) => {
+router.get('/', async (ctx) => {
   ctx.set('Content-Type', 'text/html; charset=utf-8')
   ctx.body = template.stream({})
 })
+
+app.use(router.getRequestHandler())
 
 app.listen(port, function () {
   console.log(`Go to http://localhost:${port} to view the demo...`)
