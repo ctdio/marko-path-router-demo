@@ -58,6 +58,15 @@ module.exports = {
       .appendTo(this.getEl('router-container'))
       .getComponent()
 
+    router.beforeEach((from, to, next) => {
+      console.log(`BeforeEach hook. Transitioning from ${from} to ${to}`)
+      next()
+    })
+
+    router.afterEach((from, to) => {
+      console.log(`AfterEach hook. Transitioning from ${from} to ${to}`)
+    })
+
     state.currentRoute = router.currentRoute
 
     router.on('update', () => {

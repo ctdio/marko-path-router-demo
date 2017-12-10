@@ -27,7 +27,7 @@
     "lasso": "^2.11.8",
     "lasso-marko": "^2.3.0",
     "marko": "^4.2.8",
-    "marko-path-router": "^0.1.0",
+    "marko-path-router": "^0.7.0",
     "require-self-ref": "^2.0.1",
     "serve-static": "^1.12.1"
   }
